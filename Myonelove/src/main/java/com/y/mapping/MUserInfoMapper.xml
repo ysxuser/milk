@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.y.mapper.MUserInfoMapper">
+	<resultMap id="BaseResultMap" type="com.y.model.MUserInfo">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="user_number" jdbcType="VARCHAR" property="usernumber" />
+		<result column="mobilephone" jdbcType="VARCHAR" property="mobilephone" />
+		<result column="ID_CARD" jdbcType="VARCHAR" property="idCard" />
+		<result column="creation_time" jdbcType="VARCHAR" property="creationTime" />
+		<result column="status" jdbcType="VARCHAR" property="status" />
+		<result column="password" jdbcType="VARCHAR" property="password" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user_number, mobilephone, id_card, creation_time, status, password
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap">
+		select * from m_user_info
+	</select>
+	<select id="selectUserByMobilephone" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from m_user_info where mobilephone=#{mobilephone,jdbcType=DECIMAL}
+	</select>
+
+	<insert id="insert" parameterType="com.y.model.MUserInfo" >
+	insert into m_user_info (user_number, mobilephone, id_card, 
+      creation_time, status,password)
+    values (#{userNumber,jdbcType=VARCHAR}, #{mobilephone,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{creationTime,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR} , #{password,jdbcType=VARCHAR})
+	</insert>
+	
+</mapper>
